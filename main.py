@@ -56,6 +56,14 @@ class MusicPlayer:
                 before_options="-reconnect 1 -reconnect_streamed 1 -reconnect_delay_max 5",
                 options="-vn"
             )
+        except Exception as e:
+            if "Sign in to confirm you're not a bot" in str(e):
+                print("Lỗi cookies YouTube!")
+                try:
+                    await self.voice_client.channel.send("❌ Cookies YouTube hết hạn hoặc không hợp lệ. Vui lòng cập nhật lại file cookies.txt!")
+                except:
+                    pass
+            raise e
 
             def after_playing(error):
                 if error:
